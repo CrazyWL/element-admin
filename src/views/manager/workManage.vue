@@ -263,6 +263,10 @@
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.date" />
           <el-input v-else v-model="person.tel1" />
         </el-form-item>
+        <el-form-item label="人天数">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.date" />
+          <el-input v-else v-model="person.tel1" disabled />
+        </el-form-item>
         <el-form-item label="问题">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name1" />
           <el-input v-else v-model="person.name1" />

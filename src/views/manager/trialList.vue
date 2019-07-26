@@ -61,11 +61,11 @@
       :header-cell-style="{background:'#f1f7ff',color:'#606266'}"
       @sort-change="sortChange"
     >
-      <el-table-column
+      <!-- <el-table-column
         type="selection"
         align="center"
         width="38"
-      />
+      /> -->
       <el-table-column label="序号" align="center" width="50">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>

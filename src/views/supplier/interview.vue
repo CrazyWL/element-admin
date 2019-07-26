@@ -1,11 +1,15 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <router-link :to="{path:'interviewInfo',query:{id:2}}">
-        <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell">
-          批量面试
-        </el-button>
-      </router-link>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus" @click="handleCreate()">
+        面试人员新增
+      </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
+        批量推荐面试
+      </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-download">
+        导入面试人员
+      </el-button>
       <!-- <el-button v-waves :loading="downloadLoading" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-download" @click="handleDownload">
         导出
       </el-button> -->
@@ -34,11 +38,20 @@
           <el-select v-model="listQuery.type" placeholder="岗位" clearable class="filter-item" style="width: 160px">
             <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
           </el-select>
-          <el-select v-model="listQuery.importance" placeholder="岗位级别" clearable style="width: 120px" class="filter-item">
+          <el-select v-model="listQuery.importance" placeholder="岗位级别" clearable style="width: 160px" class="filter-item">
             <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
           </el-select>
-          <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-input v-model="listQuery.title" placeholder="批次" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-select v-model="listQuery.education" placeholder="学历" clearable style="width: 160px" class="filter-item">
+            <el-option v-for="item in educationOptions" :key="item" :label="item" :value="item" />
+          </el-select>
+          <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-date-picker
+            v-model="value2"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          /><!-- <el-input v-model="listQuery.title" placeholder="批次" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" /> -->
           <!--<el-input v-model="listQuery.title" placeholder="标段" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
            <el-input v-model="listQuery.title" placeholder="采购合同名称" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
           <el-input v-model="listQuery.title" placeholder="项目负责人" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
@@ -48,9 +61,9 @@
           <!-- <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
             <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
           </el-select> -->
-          <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
+          <!-- <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
-          </el-select>
+          </el-select> -->
           <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
             搜索
           </el-button>
@@ -96,16 +109,16 @@
           MAP3.2统一移动平台(2019)
         </template>
       </el-table-column>
-      <el-table-column label="批次" width="80px" align="center">
+      <!-- <el-table-column label="批次" width="80px" align="center">
         <template slot-scope="">
           2019年度
         </template>
       </el-table-column>
-      <!-- <el-table-column label="管理部门" align="center">
+      <el-table-column label="管理部门" align="center">
         <template slot-scope="">
           研发部
         </template>
-      </el-table-column> -->
+      </el-table-column>
       <el-table-column label="标段" width="80px" align="center">
         <template slot-scope="">
           第一标段
@@ -120,18 +133,28 @@
         <template slot-scope="">
           金税信息技术有限公司
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="面试岗位" align="center">
         <template slot-scope="">
           JAVA开发工程师
         </template>
       </el-table-column>
-      <!-- <el-table-column label="学历" width="70px" align="center">
+      <el-table-column label="级别" width="70px;" align="center">
+        <template slot-scope="">
+          高级
+        </template>
+      </el-table-column>
+      <el-table-column label="学历" width="70px" align="center">
         <template slot-scope="">
           本科
         </template>
       </el-table-column>
-      <el-table-column label="毕业院校" width="120px" align="center">
+      <el-table-column label="专业" width="140px" align="center">
+        <template slot-scope="">
+          计算机科学与技术
+        </template>
+      </el-table-column>
+      <!-- <el-table-column label="毕业院校" width="120px" align="center">
         <template slot-scope="">
           华南理工大学
         </template>
@@ -163,15 +186,14 @@
       </el-table-column> -->
       <el-table-column label="操作" width="160px" align="center">
         <template slot-scope="">
-
-          <el-button size="mini" type="primary" @click="handleView(row)">
-            查看
-          </el-button>
-          <router-link :to="{path:'interviewInfo',query:{id:1}}">
+          <router-link to="projecterInfo">
             <el-button size="mini" type="primary">
-              面试
+              查看
             </el-button>
           </router-link>
+          <el-button size="mini" type="primary" @click="open">
+            推荐面试
+          </el-button>
           <!-- <el-button type="success" size="mini" @click="handleUpdate(row)">
             编辑
           </el-button> -->
@@ -266,35 +288,25 @@
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name" />
           <el-input v-else v-model="person.name1" />
         </el-form-item>
-        <el-form-item label="性别" prop="title">
+        <el-form-item label="合作项目" prop="type">
+          <el-select v-model="person.project" class="filter-item" placeholder="合作项目">
+            <el-option v-for="item of projectOptions" :key="item.key" :label="item.display_name" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="身份证号" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.userID" />
+          <el-input v-else v-model="person.userID1" />
+        </el-form-item>
+        <el-form-item label="性别">
           <el-radio-group v-model="radio">
             <el-radio :label="1">保密</el-radio>
             <el-radio :label="2">男</el-radio>
             <el-radio :label="3">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="身份证号" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.userID" />
-          <el-input v-else v-model="person.userID1" />
-        </el-form-item>
         <el-form-item label="手机号" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.tel" />
           <el-input v-else v-model="person.tel1" />
-        </el-form-item>
-        <el-form-item label="合作项目" prop="type">
-          <el-select v-model="person.project" class="filter-item" placeholder="合作项目">
-            <el-option v-for="item of projectOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="岗位" prop="type">
-          <el-select v-model="person.post" class="filter-item" placeholder="岗位">
-            <el-option v-for="item of calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="级别" prop="type">
-          <el-select v-model="person.level" class="filter-item" placeholder="级别">
-            <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
         </el-form-item>
         <el-form-item label="学历" prop="type">
           <el-select v-model="person.education" class="filter-item" placeholder="学历">
@@ -313,7 +325,28 @@
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.workYear" />
           <el-input v-else v-model="person.workYear1" />
         </el-form-item>
-        <el-form-item label="身份证明" prop="title">
+        <el-form-item label="岗位" prop="type">
+          <el-select v-model="person.post" class="filter-item" placeholder="岗位">
+            <el-option v-for="item of calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="级别" prop="type">
+          <el-select v-model="person.level" class="filter-item" placeholder="级别">
+            <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="个人简历" prop="title">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple
+          >
+            <i class="el-icon-upload" />
+            <div slot="tip" class="el-upload__tip">只能上传doc/pdf文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="学历证明">
           <el-upload
             class="upload-demo"
             drag
@@ -325,7 +358,7 @@
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="学历证明" prop="title">
+        <el-form-item label="社保证明">
           <el-upload
             class="upload-demo"
             drag
@@ -337,7 +370,7 @@
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="社保证明" prop="title">
+        <el-form-item label="身份证明">
           <el-upload
             class="upload-demo"
             drag
@@ -349,9 +382,13 @@
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="账户启用状态" prop="title">
+        <el-form-item label="备注">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.userID" />
+          <el-input v-else v-model="person.userID1" />
+        </el-form-item>
+        <!-- <el-form-item label="账户启用状态" prop="title">
           <el-switch v-model="value6" disabled />
-        </el-form-item>
+        </el-form-item> -->
         <!-- <el-form-item label="合作项目" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.project" />
           <el-input v-else v-model="person.project1" />
@@ -452,6 +489,7 @@ export default {
   data() {
     return {
       radio: 1,
+      value2: '',
       value6: true,
       tableKey: 0,
       list: null,

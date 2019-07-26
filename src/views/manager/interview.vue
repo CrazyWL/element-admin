@@ -3,7 +3,7 @@
     <div class="block">
       <router-link :to="{path:'interviewInfo',query:{id:2}}">
         <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell">
-          批量面试
+          批量考试选拔
         </el-button>
       </router-link>
       <!-- <el-button v-waves :loading="downloadLoading" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-download" @click="handleDownload">
@@ -48,9 +48,9 @@
           <!-- <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
             <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
           </el-select> -->
-          <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
+          <!-- <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
-          </el-select>
+          </el-select> -->
           <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
             搜索
           </el-button>
@@ -93,29 +93,24 @@
       </el-table-column>
       <el-table-column label="合作项目" align="center">
         <template slot-scope="">
-          MAP3.2统一移动平台(2019)
+          MAP3.2统一移动平台
         </template>
       </el-table-column>
-      <el-table-column label="批次" width="80px" align="center">
+      <!-- <el-table-column label="批次" width="80px" align="center">
         <template slot-scope="">
           2019年度
         </template>
       </el-table-column>
-      <!-- <el-table-column label="管理部门" align="center">
+      <el-table-column label="管理部门" align="center">
         <template slot-scope="">
           研发部
         </template>
-      </el-table-column> -->
+      </el-table-column>
       <el-table-column label="标段" width="80px" align="center">
         <template slot-scope="">
           第一标段
         </template>
-      </el-table-column>
-      <el-table-column label="申请日期" width="95px" align="center">
-        <template slot-scope="">
-          2019/09/11
-        </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column label="外包公司" align="center">
         <template slot-scope="">
           金税信息技术有限公司
@@ -124,6 +119,11 @@
       <el-table-column label="面试岗位" align="center">
         <template slot-scope="">
           JAVA开发工程师
+        </template>
+      </el-table-column>
+      <el-table-column width="80px" label="级别" align="center">
+        <template slot-scope="">
+          高级
         </template>
       </el-table-column>
       <!-- <el-table-column label="学历" width="70px" align="center">
@@ -139,6 +139,11 @@
       <el-table-column label="工作年限" width="80px" align="center">
         <template slot-scope="">
           3
+        </template>
+      </el-table-column>
+      <el-table-column label="申请日期" width="95px" align="center">
+        <template slot-scope="">
+          2019/09/11
         </template>
       </el-table-column>
       <!-- <el-table-column label="采购编码" width="120px" align="center">
@@ -163,13 +168,14 @@
       </el-table-column> -->
       <el-table-column label="操作" width="160px" align="center">
         <template slot-scope="">
-
-          <el-button size="mini" type="primary" @click="handleView(row)">
-            查看
-          </el-button>
+          <router-link to="interviewInfoView">
+            <el-button size="mini" type="primary">
+              查看
+            </el-button>
+          </router-link>
           <router-link :to="{path:'interviewInfo',query:{id:1}}">
             <el-button size="mini" type="primary">
-              面试
+              考试选拔
             </el-button>
           </router-link>
           <!-- <el-button type="success" size="mini" @click="handleUpdate(row)">

@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
+      <!-- <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
         送部门经理审批
-      </el-button>
+      </el-button> -->
       <!-- <el-button v-waves :loading="downloadLoading" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-download" @click="handleDownload">
         导出
       </el-button> -->
@@ -28,18 +28,25 @@
             </div>
           </template>
           <el-input v-model="listQuery.title" placeholder="姓名" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-input v-model="listQuery.title" placeholder="合作项目" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-select v-model="listQuery.type" placeholder="岗位" clearable class="filter-item" style="width: 160px">
+          <el-input v-model="listQuery.title" placeholder="合作项目" style="width: 180px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-select v-model="listQuery.type" placeholder="岗位" clearable class="filter-item" style="width: 140px">
             <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
           </el-select>
-          <el-select v-model="listQuery.importance" placeholder="岗位级别" clearable style="width: 120px" class="filter-item">
+          <el-select v-model="listQuery.importance" placeholder="岗位级别" clearable style="width: 140px" class="filter-item">
             <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
           </el-select>
-          <el-select v-model="listQuery.importance" placeholder="学历" clearable style="width: 120px" class="filter-item">
+          <el-select v-model="listQuery.importance" placeholder="学历" clearable style="width: 140px" class="filter-item">
             <el-option v-for="item in educationOptions" :key="item" :label="item" :value="item" />
           </el-select>
-          <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-input v-model="listQuery.title" placeholder="批次" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 140px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-input v-model="listQuery.title" placeholder="批次" style="width: 160px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-date-picker
+            v-model="value5"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          />
           <!--<el-input v-model="listQuery.title" placeholder="标段" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
            <el-input v-model="listQuery.title" placeholder="采购合同名称" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
           <el-input v-model="listQuery.title" placeholder="项目负责人" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
@@ -77,11 +84,11 @@
       :header-cell-style="{background:'#f1f7ff',color:'#606266'}"
       @sort-change="sortChange"
     >
-      <el-table-column
+      <!-- <el-table-column
         type="selection"
         align="center"
         width="38"
-      />
+      /> -->
       <el-table-column label="序号" align="center" width="50">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
@@ -116,34 +123,39 @@
           <span>{{ scope.row.pc }}</span>
         </template>
       </el-table-column> -->
-      <el-table-column label="申请日期" width="95px" align="center">
+      <!-- <el-table-column label="申请日期" width="95px" align="center">
         <template slot-scope="scope">
 
           <span>{{ scope.row.sqrq }}</span>
         </template>
-      </el-table-column>
-      <el-table-column label="外包公司" align="center">
+      </el-table-column> -->
+      <!-- <el-table-column label="外包公司" align="center">
         <template slot-scope="scope">
 
           <span>{{ scope.row.company }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="面试岗位" align="center">
         <template slot-scope="scope">
 
           <span>{{ scope.row.gw }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="学历" width="70px" align="center">
+      <el-table-column label="级别" width="70px" align="center">
+        <template slot-scope="">
+          高级
+        </template>
+      </el-table-column>
+      <el-table-column label="学历" width="70px" align="center">
         <template slot-scope="">
           本科
         </template>
       </el-table-column>
-      <el-table-column label="毕业院校" width="120px" align="center">
+      <el-table-column label="专业" width="140px" align="center">
         <template slot-scope="">
-          华南理工大学
+          计算机科学与技术
         </template>
-      </el-table-column> -->
+      </el-table-column>
       <el-table-column label="工作年限" width="80px" align="center">
         <template slot-scope="scope">
 
@@ -170,23 +182,24 @@
         <template slot-scope="">
           旧机场
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column label="状态" width="70px" align="center">
         <template slot-scope="">
-          新建
+          已退场
         </template>
-      </el-table-column> -->
+      </el-table-column>
       <el-table-column label="操作" width="170px" align="center">
         <template slot-scope="">
-
-          <el-button size="mini" type="primary" @click="handleView(row)">
-            查看
-          </el-button>
           <router-link to="exitDetail">
+            <el-button size="mini" type="primary">
+              查看
+            </el-button>
+          </router-link>
+          <!-- <router-link to="exitDetail">
             <el-button size="mini" type="warning">
               退场
             </el-button>
-          </router-link>
+          </router-link> -->
           <!-- <router-link :to="{path:'interviewInfo',query:{id:1}}">
             <el-button size="mini" type="primary">
               入场试用
@@ -478,7 +491,7 @@ export default {
       list: [
         {
           id: 1,
-          pc: '第一批次',
+          pc: '2019年度',
           name: '李庆',
           gw: 'JAVA开发工程师',
           jb: '高级',
@@ -492,7 +505,7 @@ export default {
         },
         {
           id: 2,
-          pc: '第一批次',
+          pc: '2019年度',
           name: '高渐离',
           gw: 'JAVA开发工程师',
           project: '地服资源管理系统',

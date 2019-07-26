@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="block">
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-        送部门经理审批
+        送研发处
       </el-button>
       <!-- <el-button v-waves :loading="downloadLoading" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-download" @click="handleDownload">
         导出
