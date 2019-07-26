@@ -55,20 +55,41 @@
       </div></el-col>
     </el-row>
     <el-row :gutter="20">
-      <el-col :span="6"><div class="grid-content bg-purple">需交还物品</div></el-col>
+      <el-col :span="6"><div class="grid-content bg-purple">管理研发出处理意见</div></el-col>
+      <el-col :span="18"><div class="grid-content">
+        是否已禁用SSO临时账号
+        <el-radio v-model="radio" style="margin-left:20px;" label="1">是</el-radio>
+        <el-radio v-model="radio" label="2">否</el-radio>
+        <el-radio v-model="radio" label="3">无账号</el-radio>
+      </div></el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span="6"><div class="grid-content bg-purple">管理研发出处理意见</div></el-col>
+      <el-col :span="18"><div class="grid-content">
+        是否已清理RDM授权等
+        <el-radio v-model="radio" style="margin-left:20px;" label="1">是</el-radio>
+        <el-radio v-model="radio" label="2">否</el-radio>
+        <el-radio v-model="radio" label="3">无账号</el-radio>
+      </div></el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :span="6"><div class="grid-content bg-purple">备注</div></el-col>
       <el-col :span="18"><div class="grid-content">
         <el-input type="textarea" />
       </div></el-col>
     </el-row>
-    <el-row :gutter="20">
+    <!-- <el-row :gutter="20">
       <el-col :span="6"><div class="grid-content bg-purple">项目负责人意见</div></el-col>
       <el-col :span="18"><div class="grid-content">
         <el-input type="textarea" />
       </div></el-col>
-    </el-row>
+    </el-row> -->
     <div style="margin:20px;text-align:center;">
       <el-button class="filter-item" style="width:120px;" type="primary" @click="open">
         保存
+      </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open1">
+        送研发处
       </el-button>
     </div>
     <!-- <el-row :gutter="20">
@@ -160,6 +181,12 @@ export default {
     open() {
       this.$message({
         message: '保存成功!',
+        type: 'success'
+      })
+    },
+    open1() {
+      this.$message({
+        message: '发送成功!',
         type: 'success'
       })
     },

@@ -56,7 +56,7 @@
           <!-- <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
             <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
           </el-select> -->
-          <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
+          <el-select v-model="listQuery.status" placeholder="考试结果" clearable style="width: 120px" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
           </el-select>
           <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
@@ -106,7 +106,7 @@
       </el-table-column>
       <el-table-column label="批次" width="80px" align="center">
         <template slot-scope="">
-          第一批次
+          2019年度
         </template>
       </el-table-column>
       <!-- <el-table-column label="管理部门" align="center">
@@ -129,7 +129,7 @@
           金税信息技术有限公司
         </template>
       </el-table-column>
-      <el-table-column label="面试岗位" width="90px" align="center">
+      <el-table-column label="面试岗位" width="130px" align="center">
         <template slot-scope="">
           JAVA开发工程师
         </template>
@@ -144,12 +144,12 @@
           华南理工大学
         </template>
       </el-table-column> -->
-      <el-table-column label="面试日期" width="80px" align="center">
+      <el-table-column label="考试日期" width="100px" align="center">
         <template slot-scope="">
           2019/09/11
         </template>
       </el-table-column>
-      <el-table-column align="center" label="面试分数" width="80">
+      <!-- <el-table-column align="center" label="面试分数" width="80">
         <template>
           <span>87</span>
         </template>
@@ -163,8 +163,8 @@
         <template>
           <span>83</span>
         </template>
-      </el-table-column>
-      <el-table-column align="center" label="面试结果" width="80">
+      </el-table-column> -->
+      <el-table-column align="center" label="考试结果" width="100">
         <template>
           <span>合格</span>
         </template>
@@ -510,7 +510,7 @@ export default {
       },
       importanceOptions: ['高级', '中级', '初级'],
       educationOptions: ['研究生', '本科', '大专'],
-      statusOptions: ['新建', '面试入围', '面试合格', '面试失败', '申请入场试用', '入场试用', '正式入场', '退场'],
+      statusOptions: ['合格', '不合格'],
       projectOptions: ['MAP3.2统一移动平台(2019)', '地服资源管理系统'],
       calendarTypeOptions,
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],

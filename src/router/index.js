@@ -246,34 +246,41 @@ export const asyncRoutes = [
         path: 'interview',
         component: () => import('@/views/manager/interview'),
         name: '',
-        meta: { title: '面试' }
+        meta: { title: '考试选拔' }
       },
       {
         path: 'interviewInfo',
         component: () => import('@/views/manager/interviewInfo'),
         name: '',
         hidden: true,
-        meta: { title: '面试详情' }
+        meta: { title: '考试选拔详情' }
+      },
+      {
+        path: 'interviewInfoView',
+        component: () => import('@/views/manager/interviewInfoView'),
+        name: '',
+        hidden: true,
+        meta: { title: '考试详情' }
       },
       {
         path: 'interviewList',
         component: () => import('@/views/manager/interviewList'),
         name: '',
         // hidden: true,
-        meta: { title: '面试历史记录' }
+        meta: { title: '考试选拔历史记录' }
       },
       {
         path: 'trial',
         component: () => import('@/views/manager/trial'),
         name: '',
-        // hidden: true,
+        hidden: true,
         meta: { title: '入场试用申请' }
       },
       {
         path: 'trialList',
         component: () => import('@/views/manager/trialList'),
         name: '',
-        // hidden: true,
+        hidden: true,
         meta: { title: '入场试用申请历史记录' }
       },
       {
@@ -401,16 +408,22 @@ export const asyncRoutes = [
       //   hidden: true
       // },
       {
+        path: '/supplier/dashboard',
+        component: () => import('@/views/supplier/dashboard/index'),
+        name: '',
+        meta: { title: '首页' }
+      },
+      {
         path: 'list',
         component: () => import('@/views/supplier/list'),
         name: 'ArticleList',
-        meta: { title: '合作项目列表' }
+        meta: { title: '合作项目' }
       },
       {
         path: 'tab',
         component: () => import('@/views/supplier/tab'),
         name: '',
-        // hidden: true,
+        hidden: true,
         meta: { title: '合作项目详情' }
       },
       {
@@ -418,7 +431,14 @@ export const asyncRoutes = [
         component: () => import('@/views/supplier/projecter'),
         name: '',
         // hidden: true,
-        meta: { title: '项目外包人员' }
+        meta: { title: '外派人员' }
+      },
+      {
+        path: 'projecterInfo',
+        component: () => import('@/views/supplier/projecterInfo'),
+        name: '',
+        hidden: true,
+        meta: { title: '人员详情' }
       },
       // {
       //   path: 'listCompany',
@@ -430,7 +450,7 @@ export const asyncRoutes = [
         path: 'interview',
         component: () => import('@/views/supplier/interview'),
         name: '',
-        meta: { title: '面试' }
+        meta: { title: '面试申请' }
       },
       {
         path: 'interviewInfo',
@@ -444,13 +464,13 @@ export const asyncRoutes = [
         component: () => import('@/views/supplier/interviewList'),
         name: '',
         // hidden: true,
-        meta: { title: '面试历史记录' }
+        meta: { title: '面试记录' }
       },
       {
         path: 'trial',
         component: () => import('@/views/supplier/trial'),
         name: '',
-        // hidden: true,
+        hidden: true,
         meta: { title: '入场试用申请' }
       },
       {
@@ -458,34 +478,41 @@ export const asyncRoutes = [
         component: () => import('@/views/supplier/trialList'),
         name: '',
         // hidden: true,
-        meta: { title: '入场试用申请历史记录' }
+        meta: { title: '入场试用申请记录' }
       },
       {
         path: 'trialInfo',
         component: () => import('@/views/supplier/trialInfo'),
         name: '',
         // hidden: true,
-        meta: { title: '入场试用考核列表' }
+        meta: { title: '入场试用考核查看' }
+      },
+      {
+        path: 'supplierList',
+        component: () => import('@/views/supplier/supplierList'),
+        name: '',
+        hidden: true,
+        meta: { title: '月度考核查阅' }
       },
       {
         path: 'trialView',
         component: () => import('@/views/supplier/trialView'),
         name: '',
-        // hidden: true,
+        hidden: true,
         meta: { title: '入场试用考核审核结果' }
       },
       {
         path: 'check',
         component: () => import('@/views/supplier/check'),
         name: '',
-        // hidden: true,
-        meta: { title: '入场试用考核' }
+        hidden: true,
+        meta: { title: '入场试用考核详情' }
       },
       {
         path: 'workManage',
         component: () => import('@/views/supplier/workManage'),
         name: '',
-        // hidden: true,
+        hidden: true,
         meta: { title: '工时申请审核列表' }
       },
       {
@@ -493,50 +520,50 @@ export const asyncRoutes = [
         component: () => import('@/views/supplier/workList'),
         name: '',
         // hidden: true,
-        meta: { title: '工时历史审核记录' }
+        meta: { title: '外派人员工时查看' }
+      },
+      {
+        path: 'checkManage',
+        component: () => import('@/views/supplier/checkManage'),
+        name: '',
+        // hidden: true,
+        meta: { title: '外派人员考勤查看' }
       },
       {
         path: 'supplier',
         component: () => import('@/views/supplier/supplier'),
         name: '',
-        // hidden: true,
-        meta: { title: '供应商月度考核' }
-      },
-      {
-        path: 'supplierList',
-        component: () => import('@/views/supplier/supplierList'),
-        name: '',
-        // hidden: true,
-        meta: { title: '供应商月度考核记录' }
+        hidden: true,
+        meta: { title: '月度考核详情查看' }
       },
       {
         path: 'out',
         component: () => import('@/views/supplier/out'),
         name: '',
         // hidden: true,
-        meta: { title: '办理退场' }
+        meta: { title: '外派人员退场查看' }
       },
       {
         path: 'exitDetail',
         component: () => import('@/views/supplier/exitDetail'),
         name: '',
-        // hidden: true,
-        meta: { title: '外包人员办理退场详情' }
-      },
-      {
-        path: 'checkManage',
-        component: () => import('@/views/supplier/checkManage'),
-        name: '',
         hidden: true,
-        meta: { title: '考勤记录' }
+        meta: { title: '外包人员退场办理详情' }
       },
       {
-        path: 'outList',
-        component: () => import('@/views/supplier/outList'),
+        path: 'file',
+        component: () => import('@/views/supplier/file'),
         name: '',
         // hidden: true,
-        meta: { title: '退场历史记录' }
+        meta: { title: '归档人员' }
       },
+      // {
+      //   path: 'outList',
+      //   component: () => import('@/views/supplier/outList'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '退场历史记录' }
+      // },
       // {
       //   path: 'projectImport',
       //   component: () => import('@/views/supplier/projectImport'),
@@ -553,6 +580,217 @@ export const asyncRoutes = [
       {
         path: 'exit',
         component: () => import('@/views/supplier/exit'),
+        name: '',
+        hidden: true,
+        meta: { title: '外包人员退场' }
+      }
+      // {
+      //   path: 'create',
+      //   component: () => import('@/views/example/create'),
+      //   name: 'CreateArticle',
+      //   meta: { title: 'Create Article' }
+      // }
+    ]
+  },
+  {
+    path: '/HR',
+    component: Layout,
+    redirect: '/hr/list',
+    name: 'Example',
+    meta: {
+      title: 'HR',
+      icon: 'excel'
+    },
+    children: [
+
+      // {
+      //   path: 'edit/:id(\\d+)',
+      //   component: () => import('@/views/supplier/edit'),
+      //   name: 'EditArticle',
+      //   meta: { title: 'Edit Article', noCache: true, activeMenu: '/supplier/list' },
+      //   hidden: true
+      // },
+      {
+        path: '/HR/dashboard',
+        component: () => import('@/views/HR/dashboard/index'),
+        name: '',
+        meta: { title: '首页' }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/HR/list'),
+        name: 'ArticleList',
+        meta: { title: '合作项目' }
+      },
+      {
+        path: 'tab',
+        component: () => import('@/views/HR/tab'),
+        name: '',
+        hidden: true,
+        meta: { title: '合作项目详情' }
+      },
+      {
+        path: 'projecter',
+        component: () => import('@/views/HR/projecter'),
+        name: '',
+        // hidden: true,
+        meta: { title: '外包人员' }
+      },
+      {
+        path: 'projecterInfo',
+        component: () => import('@/views/HR/projecterInfo'),
+        name: '',
+        hidden: true,
+        meta: { title: '人员详情' }
+      },
+      // {
+      //   path: 'listCompany',
+      //   component: () => import('@/views/HR/listCompany'),
+      //   name: '',
+      //   meta: { title: '合作项目-外包' }
+      // },
+      {
+        path: 'interview',
+        component: () => import('@/views/HR/interview'),
+        name: '',
+        hidden: true,
+        meta: { title: '面试申请' }
+      },
+      {
+        path: 'interviewInfo',
+        component: () => import('@/views/HR/interviewInfo'),
+        name: '',
+        hidden: true,
+        meta: { title: '面试详情' }
+      },
+      {
+        path: 'interviewList',
+        component: () => import('@/views/HR/interviewList'),
+        name: '',
+        // hidden: true,
+        meta: { title: '面试记录' }
+      },
+      {
+        path: 'trial',
+        component: () => import('@/views/HR/trial'),
+        name: '',
+        hidden: true,
+        meta: { title: '入场试用申请' }
+      },
+      {
+        path: 'trialList',
+        component: () => import('@/views/HR/trialList'),
+        name: '',
+        // hidden: true,
+        meta: { title: '入场试用审批' }
+      },
+      {
+        path: 'trialListView',
+        component: () => import('@/views/HR/trialListView'),
+        name: '',
+        // hidden: true,
+        meta: { title: '入场试用审批记录' }
+      },
+      {
+        path: 'trialInfo',
+        component: () => import('@/views/HR/trialInfo'),
+        name: '',
+        // hidden: true,
+        meta: { title: '入场试用考核查看' }
+      },
+      {
+        path: 'supplierList',
+        component: () => import('@/views/HR/supplierList'),
+        name: '',
+        hidden: true,
+        meta: { title: '月度考核查阅' }
+      },
+      {
+        path: 'trialView',
+        component: () => import('@/views/HR/trialView'),
+        name: '',
+        hidden: true,
+        meta: { title: '入场试用考核审核结果' }
+      },
+      {
+        path: 'check',
+        component: () => import('@/views/HR/check'),
+        name: '',
+        hidden: true,
+        meta: { title: '入场试用考核详情' }
+      },
+      {
+        path: 'workManage',
+        component: () => import('@/views/HR/workManage'),
+        name: '',
+        hidden: true,
+        meta: { title: '工时申请审核列表' }
+      },
+      {
+        path: 'workList',
+        component: () => import('@/views/HR/workList'),
+        name: '',
+        // hidden: true,
+        meta: { title: '外包人员工时查看' }
+      },
+      {
+        path: 'checkManage',
+        component: () => import('@/views/HR/checkManage'),
+        name: '',
+        // hidden: true,
+        meta: { title: '外包人员考勤查看' }
+      },
+      {
+        path: 'supplier',
+        component: () => import('@/views/HR/supplier'),
+        name: '',
+        hidden: true,
+        meta: { title: '月度考核详情查看' }
+      },
+      {
+        path: 'out',
+        component: () => import('@/views/HR/out'),
+        name: '',
+        // hidden: true,
+        meta: { title: '外包人员退场查看' }
+      },
+      {
+        path: 'exitDetail',
+        component: () => import('@/views/HR/exitDetail'),
+        name: '',
+        hidden: true,
+        meta: { title: '外包人员退场办理详情' }
+      },
+      {
+        path: 'file',
+        component: () => import('@/views/HR/file'),
+        name: '',
+        // hidden: true,
+        meta: { title: '归档人员' }
+      },
+      // {
+      //   path: 'outList',
+      //   component: () => import('@/views/HR/outList'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '退场历史记录' }
+      // },
+      // {
+      //   path: 'projectImport',
+      //   component: () => import('@/views/HR/projectImport'),
+      //   name: '',
+      //   meta: { title: '项目导入' }
+      // },
+      // {
+      //   path: 'tab',
+      //   component: () => import('@/views/HR/tab'),
+      //   name: '',
+      //   hidden: true,
+      //   meta: { title: '项目详情' }
+      // },
+      {
+        path: 'exit',
+        component: () => import('@/views/HR/exit'),
         name: '',
         hidden: true,
         meta: { title: '外包人员退场' }

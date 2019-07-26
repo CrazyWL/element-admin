@@ -33,16 +33,20 @@
           <el-col :span="6"><div class="grid-content ">5</div></el-col>
           <el-col :span="6"><div class="grid-content bg-purple">总人天数</div></el-col>
           <el-col :span="6"><div class="grid-content ">1500</div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple">已用人天数</div></el-col>
+          <el-col :span="6"><div class="grid-content ">1200</div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple">剩余人天数</div></el-col>
+          <el-col :span="6"><div class="grid-content ">500</div></el-col>
           <el-col :span="6"><div class="grid-content bg-purple">已入场试用人数</div></el-col>
           <el-col :span="6"><div class="grid-content ">2</div></el-col>
           <el-col :span="6"><div class="grid-content bg-purple">正式入场人数</div></el-col>
           <el-col :span="6"><div class="grid-content ">2</div></el-col>
-          <el-col :span="6"><div class="grid-content bg-purple">个人简历</div></el-col>
+          <!-- <el-col :span="6"><div class="grid-content bg-purple">个人简历</div></el-col>
           <el-col :span="18"><div class="grid-content ">陈一峰个人简历.doc</div></el-col>
           <el-col :span="6"><div class="grid-content bg-purple">学历证明</div></el-col>
           <el-col :span="18"><div class="grid-content ">陈一峰学历证明.png</div></el-col>
           <el-col :span="6" style="border:0;"><div class="grid-content bg-purple">社保证明</div></el-col>
-          <el-col :span="18" style="border:0;"><div class="grid-content ">陈一峰社保证明.png</div></el-col>
+          <el-col :span="18" style="border:0;"><div class="grid-content ">陈一峰社保证明.png</div></el-col> -->
         </el-row>
 
       </el-tab-pane>
@@ -96,6 +100,11 @@
               <span>本科</span>
             </template>
           </el-table-column>
+          <el-table-column width="120px" align="center" label="专业要求">
+            <template>
+              <span>计算机相关专业</span>
+            </template>
+          </el-table-column>
 
           <el-table-column width="150px" align="center" label="工作年限要求">
             <template>
@@ -118,7 +127,7 @@
           :total="50"
         />
       </el-tab-pane>
-      <el-tab-pane label="面试记录" name="面试记录">
+      <el-tab-pane label="考试选拔记录" name="面试记录">
 
         <!-- <div v-if="role == '1'" class="block">
           <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
@@ -185,7 +194,7 @@
           </el-table-column>
           <el-table-column width="90px" align="center" label="批次">
             <template>
-              <span>第一批次</span>
+              <span>2019年度</span>
             </template>
           </el-table-column>
           <el-table-column align="center" label="外包公司">
@@ -209,7 +218,7 @@
             </template>
           </el-table-column> -->
 
-          <el-table-column align="center" label="面试日期">
+          <el-table-column align="center" label="考试日期">
             <template>
               <span>2019-09-11</span>
             </template>
@@ -221,7 +230,7 @@
             </template>
           </el-table-column> -->
 
-          <el-table-column align="center" label="面试分数" width="80">
+          <el-table-column align="center" label="考试分数" width="80">
             <template>
               <span>87</span>
             </template>
@@ -236,7 +245,7 @@
               <span>83</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="面试结果" width="80">
+          <el-table-column align="center" label="考试结果" width="80">
             <template>
               <span>合格</span>
             </template>
@@ -331,14 +340,14 @@
               <span>13176554433</span>
             </template>
           </el-table-column>
-          <el-table-column align="center" width="110px" label="合作项目">
+          <el-table-column align="center" width="150px" label="合作项目">
             <template>
               <span>MAP3.2统一移动平台</span>
             </template>
           </el-table-column>
           <el-table-column align="center" width="100px" label="批次">
             <template>
-              <span>第一批</span>
+              <span>2019年度</span>
             </template>
           </el-table-column>
           <el-table-column align="center" label="外包公司">

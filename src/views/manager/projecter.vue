@@ -116,14 +116,16 @@
       </el-table-column>
       <el-table-column label="状态" width="80px" align="center">
         <template slot-scope="">
-          正式入场
+          在岗
         </template>
       </el-table-column>
       <el-table-column label="操作" width="300px" align="center">
         <template slot-scope="">
-          <el-button size="mini" type="primary" @click="handleView(row)">
-            详情
-          </el-button>
+          <router-link :to="{path:'interviewInfoView',query:{id:1}}">
+            <el-button size="mini" type="primary">
+              详情
+            </el-button>
+          </router-link>
           <router-link to="workList">
             <el-button size="mini" type="success">
               查看工时

@@ -33,12 +33,12 @@
           <el-col :span="6"><div class="grid-content ">5</div></el-col>
           <el-col :span="6"><div class="grid-content bg-purple">总人天数</div></el-col>
           <el-col :span="6"><div class="grid-content ">1500</div></el-col>
-          <el-col :span="6"><div class="grid-content bg-purple">身份证明</div></el-col>
-          <el-col :span="18"><div class="grid-content ">陈一峰身份证明.png</div></el-col>
+          <!-- <el-col :span="6"><div class="grid-content bg-purple">个人简历</div></el-col>
+          <el-col :span="18"><div class="grid-content ">陈一峰个人简历.pdf</div></el-col>
           <el-col :span="6"><div class="grid-content bg-purple">学历证明</div></el-col>
           <el-col :span="18"><div class="grid-content ">陈一峰学历证明.png</div></el-col>
           <el-col :span="6" style="border:0;"><div class="grid-content bg-purple">社保证明</div></el-col>
-          <el-col :span="18" style="border:0;"><div class="grid-content ">陈一峰社保证明.png</div></el-col>
+          <el-col :span="18" style="border:0;"><div class="grid-content ">陈一峰社保证明.png</div></el-col> -->
         </el-row>
 
       </el-tab-pane>
@@ -140,12 +140,13 @@
           <!-- <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
             入场试用
           </el-button> -->
-          <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-            面试合格
+          <!-- <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
+            考试合格
           </el-button>
           <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-            面试不合格
-          </el-button>
+            考试不合格
+          </el-button> -->
+          <span style="color:red; font-size:12px;margin-left:20px;">（ 温馨提示：评语为必填项，其它为非必填项 ）</span>
           <!-- <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
             入场考核合格
           </el-button>
@@ -161,21 +162,21 @@
             :header-cell-style="{background:'#f1f7ff',color:'#606266'}"
             style="width: 100%"
           >
-            <el-table-column
+            <!-- <el-table-column
               type="selection"
               align="center"
               width="38"
-            />
+            /> -->
             <el-table-column label="序号" align="center" width="50">
               <template slot-scope="scope">
                 <span>{{ scope.row.id }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="批次" width="80px" align="center">
+            <!-- <el-table-column label="批次" width="80px" align="center">
               <template slot-scope="scope">
                 <span>{{ scope.row.pc }}</span>
               </template>
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column width="80px" align="center" label="姓名">
               <template slot-scope="scope">
                 <span>{{ scope.row.name }}</span>
@@ -197,11 +198,11 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="center" label="毕业院校">
+            <!-- <el-table-column align="center" label="毕业院校">
               <template slot-scope="scope">
                 <span>{{ scope.row.byyx }}</span>
               </template>
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column width="80px" align="center" label="工作年限">
               <template slot-scope="scope">
@@ -209,7 +210,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="center" label="面试分数" width="80">
+            <el-table-column align="center" label="评语" width="150">
               <template>
                 <el-input type="input" />
               </template>
@@ -222,6 +223,20 @@
             <el-table-column align="center" label="机试成绩" width="80">
               <template>
                 <el-input type="input" />
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="面试成绩" width="80">
+              <template>
+                <el-input type="input" />
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="考试合格" width="80">
+              <template>
+                <el-switch
+                  v-model="value1"
+                  style="height:40px;font-size:16px;"
+                  active-text=""
+                />
               </template>
             </el-table-column>
           </el-table>
@@ -239,19 +254,14 @@
             :header-cell-style="{background:'#f1f7ff',color:'#606266'}"
             style="width: 100%"
           >
-            <el-table-column
+            <!-- <el-table-column
               type="selection"
               align="center"
               width="38"
-            />
+            /> -->
             <el-table-column label="序号" align="center" width="50">
               <template slot-scope="scope">
                 <span>{{ scope.row.id }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="批次" width="80px" align="center">
-              <template slot-scope="scope">
-                <span>{{ scope.row.pc }}</span>
               </template>
             </el-table-column>
             <el-table-column width="80px" align="center" label="姓名">
@@ -261,15 +271,15 @@
             </el-table-column>
             <el-table-column align="center" label="岗位">
               <template slot-scope="scope">
-                <span>{{ scope.row.gw }}</span>
+                <span>{{ scope.row.gw }} </span>
               </template>
             </el-table-column>
-            <el-table-column width="80px" align="center" label="级别">
+            <el-table-column align="center" label="级别">
               <template slot-scope="scope">
                 <span>{{ scope.row.jb }}</span>
               </template>
             </el-table-column>
-            <el-table-column width="80px" align="center" label="学历">
+            <el-table-column align="center" label="学历">
               <template slot-scope="scope">
                 <span>{{ scope.row.xl }}</span>
               </template>
@@ -287,7 +297,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="center" label="面试分数" width="80">
+            <!-- <el-table-column align="center" label="评语" width="150">
               <template>
                 <el-input type="input" />
               </template>
@@ -300,6 +310,27 @@
             <el-table-column align="center" label="机试成绩" width="80">
               <template>
                 <el-input type="input" />
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="面试成绩" width="80">
+              <template>
+                <el-input type="input" />
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="考试合格" width="80">
+              <template>
+                <el-switch
+                  v-model="value1"
+                  style="height:40px;font-size:16px;"
+                  active-text=""
+                />
+              </template>
+            </el-table-column> -->
+            <el-table-column align="center" label="操作" width="100">
+              <template slot-scope="">
+                <el-button size="mini" type="primary" @click="handleUpdate()">
+                  录入成绩
+                </el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -318,12 +349,184 @@
         /> -->
       </el-tab-pane>
     </el-tabs>
+
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+      <el-form
+        ref="dataForm"
+        :rules="rules"
+        :model="temp"
+        label-position="right"
+        label-width="110px"
+        style="width: 400px;margin-left:50px;"
+      >
+        <el-form-item label="姓名" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name" />
+          <el-input v-else v-model="person.name1" />
+        </el-form-item>
+        <el-form-item label="性别" prop="title">
+          <el-radio-group v-model="radio">
+            <el-radio :label="1">保密</el-radio>
+            <el-radio :label="2">男</el-radio>
+            <el-radio :label="3">女</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="身份证号" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.userID" />
+          <el-input v-else v-model="person.userID1" />
+        </el-form-item>
+        <el-form-item label="手机号" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.tel" />
+          <el-input v-else v-model="person.tel1" />
+        </el-form-item>
+        <el-form-item label="合作项目" prop="type">
+          <el-select v-model="person.project" class="filter-item" placeholder="合作项目">
+            <el-option v-for="item of projectOptions" :key="item.key" :label="item.display_name" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="岗位" prop="type">
+          <el-select v-model="person.post" class="filter-item" placeholder="岗位">
+            <el-option v-for="item of calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="级别" prop="type">
+          <el-select v-model="person.level" class="filter-item" placeholder="级别">
+            <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="学历" prop="type">
+          <el-select v-model="person.education" class="filter-item" placeholder="学历">
+            <el-option v-for="item of educationOptions" :key="item.key" :label="item.display_name" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="毕业院校" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.school" />
+          <el-input v-else v-model="person.school1" />
+        </el-form-item>
+        <el-form-item label="专业" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.major" />
+          <el-input v-else v-model="person.major1" />
+        </el-form-item>
+        <el-form-item label="工作年限" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.workYear" />
+          <el-input v-else v-model="person.workYear1" />
+        </el-form-item>
+        <el-form-item label="身份证明" prop="title">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple
+          >
+            <i class="el-icon-upload" />
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="学历证明" prop="title">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple
+          >
+            <i class="el-icon-upload" />
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="社保证明" prop="title">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="https://jsonplaceholder.typicode.com/posts/"
+            multiple
+          >
+            <i class="el-icon-upload" />
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
+        <!-- <el-form-item label="账户启用状态" prop="title">
+          <el-switch v-model="value6" disabled />
+        </el-form-item> -->
+        <!-- <el-form-item label="合作项目" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.project" />
+          <el-input v-else v-model="person.project1" />
+        </el-form-item>
+        <el-form-item label="岗位" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.post" />
+          <el-input v-else v-model="person.post1" />
+        </el-form-item>
+        <el-form-item label="级别" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.level" />
+          <el-input v-else v-model="person.level1" />
+        </el-form-item>
+        <el-form-item label="学历" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.education" />
+          <el-input v-else v-model="person.education1" />
+        </el-form-item>-->
+        <!-- <el-form-item label="Type" prop="type">
+          <el-select v-model="temp.type" class="filter-item" placeholder="Please select">
+            <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Date" prop="timestamp">
+          <el-date-picker v-model="temp.timestamp" type="datetime" placeholder="Please pick a date" />
+        </el-form-item>
+        <el-form-item label="Title" prop="title">
+          <el-input v-model="temp.title" />
+        </el-form-item>
+        <el-form-item label="Status">
+          <el-select v-model="temp.status" class="filter-item" placeholder="Please select">
+            <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Imp">
+          <el-rate v-model="temp.importance" :colors="['#99A9BF', '#F7BA2A', '#FF9900']" :max="3" style="margin-top:8px;" />
+        </el-form-item>
+        <el-form-item label="Remark">
+          <el-input v-model="temp.remark" :autosize="{ minRows: 2, maxRows: 4}" type="textarea" placeholder="Please input" />
+        </el-form-item> -->
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">
+          取消
+        </el-button>
+        <el-button v-if="textMap[dialogStatus] !== '查看'" type="primary" @click="dialogStatus==='create'?createData():updateData()">
+          确认
+        </el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
+      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
+        <el-table-column prop="key" label="Channel" />
+        <el-table-column prop="pv" label="Pv" />
+      </el-table>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
-
 <script>
 // import tabPane from './components/TabPane'
 import { fetchList } from '@/api/article'
+
+const calendarTypeOptions = [
+  { key: 'CN', display_name: 'JAVA开发工程师' },
+  { key: 'US', display_name: '.NET开发工程师' },
+  { key: 'JP', display_name: 'WEB开发工程师' },
+  { key: 'EU', display_name: 'UI设计师' }
+]
+
+// arr to obj, such as { CN : "China", US : "USA" }
+const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
+  acc[cur.key] = cur.display_name
+  return acc
+}, {})
+
 export default {
   name: 'Tab',
   filters: {
@@ -334,11 +537,16 @@ export default {
         deleted: 'danger'
       }
       return statusMap[status]
+    },
+    typeFilter(type) {
+      return calendarTypeKeyValue[type]
     }
   },
   // components: { tabPane },
   data() {
     return {
+      radio: 0,
+      value1: false,
       tabMapOptions: [
         { label: '基本信息', key: 'CN' },
         { label: '用工信息', key: 'US' },
@@ -390,9 +598,48 @@ export default {
         type: this.type,
         sort: '+id'
       },
+      // person: {
+      //   name: '高渐离',
+      //   major: '计算机科学与技术',
+      //   project: 'MAP3.2统一移动平台',
+      //   post: 'JAVA开发工程师',
+      //   level: '高级',
+      //   education: '本科',
+      //   school: '华南理工大学',
+      //   workYear: '3',
+      //   userID: 423765456787654431,
+      //   tel: 13676543212
+      // },
       loading: false,
+      temp: {
+        id: undefined,
+        importance: 1,
+        remark: '',
+        timestamp: new Date(),
+        title: '',
+        type: '',
+        status: 'published'
+      },
+
+      importanceOptions: ['高级', '中级', '初级'],
+      educationOptions: ['研究生', '本科', '大专'],
+      calendarTypeOptions,
+      // projectOptions: ['MAP3.2统一移动平台(2019)', '地服资源管理系统'],
       dialogFormVisible: false,
-      dialogStatus: ''
+      dialogStatus: '',
+      textMap: {
+        update: '编辑',
+        create: '新建',
+        view: '查看'
+      },
+      dialogPvVisible: false,
+      pvData: [],
+      rules: {
+        type: [{ required: true, message: 'type is required', trigger: 'change' }],
+        timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
+        title: [{ required: true, message: 'title is required', trigger: 'blur' }]
+      },
+      downloadLoading: false
     }
   },
   watch: {
@@ -419,6 +666,26 @@ export default {
       this.$message({
         message: '保存成功!',
         type: 'success'
+      })
+    },
+    resetTemp() {
+      this.temp = {
+        id: undefined,
+        importance: 1,
+        remark: '',
+        timestamp: new Date(),
+        title: '',
+        status: 'published',
+        type: ''
+      }
+    },
+    handleUpdate(row) {
+      this.temp = Object.assign({}, row) // copy obj
+      this.temp.timestamp = new Date(this.temp.timestamp)
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
       })
     },
     handleCreate() {

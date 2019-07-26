@@ -32,14 +32,14 @@
           <el-select v-model="listQuery.type" placeholder="岗位" clearable class="filter-item" style="width: 160px">
             <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
           </el-select>
-          <el-select v-model="listQuery.importance" placeholder="岗位级别" clearable style="width: 120px" class="filter-item">
+          <el-select v-model="listQuery.importance" placeholder="岗位级别" clearable style="width: 160px" class="filter-item">
             <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
           </el-select>
-          <el-select v-model="listQuery.importance" placeholder="学历" clearable style="width: 120px" class="filter-item">
+          <el-select v-model="listQuery.importance" placeholder="学历" clearable style="width: 160px" class="filter-item">
             <el-option v-for="item in educationOptions" :key="item" :label="item" :value="item" />
           </el-select>
-          <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-input v-model="listQuery.title" placeholder="批次" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 160px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-input v-model="listQuery.title" placeholder="批次" style="width: 160px;" class="filter-item" @keyup.enter.native="handleFilter" />
           <!--<el-input v-model="listQuery.title" placeholder="标段" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
            <el-input v-model="listQuery.title" placeholder="采购合同名称" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
           <el-input v-model="listQuery.title" placeholder="项目负责人" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
@@ -52,6 +52,9 @@
           <!-- <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
           </el-select> -->
+          <el-select v-model="listQuery.status" placeholder="考核结果" clearable style="width: 160px" class="filter-item">
+            <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
+          </el-select>
           <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
             搜索
           </el-button>
@@ -514,7 +517,7 @@ export default {
       },
       importanceOptions: ['高级', '中级', '初级'],
       educationOptions: ['研究生', '本科', '大专'],
-      statusOptions: ['新建', '面试入围', '面试合格', '面试失败', '申请入场试用', '入场试用', '正式入场', '退场'],
+      statusOptions: ['合格', '不合格'],
       projectOptions: ['MAP3.2统一移动平台(2019)', '地服资源管理系统'],
       calendarTypeOptions,
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],

@@ -10,7 +10,8 @@
             <div class="card-panel-text">
               今日面试人数
             </div>
-            <count-to :end-val="20" class="card-panel-num" />
+            <!-- <count-to :end-val="20" class="card-panel-num" /> -->
+            <div style="font-size:20px;"> 20</div>
           </div>
         </div>
       </router-link>
@@ -25,13 +26,14 @@
             <div class="card-panel-text">
               今日面试合格人数
             </div>
-            <count-to :end-val="15" class="card-panel-num" />
+            <!-- <count-to :end-val="15" class="card-panel-num" /> -->
+            <div style="font-size:20px;"> 15</div>
           </div>
         </div>
       </router-link>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <router-link to="/component/outList">
+      <router-link to="/components/checkManage">
         <div class="card-panel" @click="handleSetLineChartData('purchases')">
           <div class="card-panel-icon-wrapper icon-money">
             <svg-icon icon-class="peoples" class-name="card-panel-icon" />
@@ -40,7 +42,8 @@
             <div class="card-panel-text">
               今日迟到人数
             </div>
-            <count-to :end-val="10" class="card-panel-num" />
+            <div style="font-size:20px;"> 10</div>
+            <!-- <count-to :end-val="10" class="card-panel-num" /> -->
           </div>
         </div>
       </router-link>
@@ -55,7 +58,8 @@
             <div class="card-panel-text">
               今日退场人数
             </div>
-            <count-to :end-val="5" class="card-panel-num" />
+            <!-- <count-to :end-val="5" class="card-panel-num" /> -->
+            <div style="font-size:20px;"> 5</div>
           </div>
         </div>
       </router-link>
@@ -64,11 +68,11 @@
 </template>
 
 <script>
-import CountTo from 'vue-count-to'
+// import CountTo from 'vue-count-to'
 
 export default {
   components: {
-    CountTo
+    // CountTo
   },
   methods: {
     handleSetLineChartData(type) {
