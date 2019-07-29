@@ -6,6 +6,9 @@
           批量考试选拔
         </el-button>
       </router-link>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="handleUpdate()">
+        选择面试负责人
+      </el-button>
       <!-- <el-button v-waves :loading="downloadLoading" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-download" @click="handleDownload">
         导出
       </el-button> -->
@@ -268,7 +271,19 @@
         label-width="110px"
         style="width: 400px;margin-left:50px;"
       >
-        <el-form-item label="姓名" prop="title">
+        <el-form-item label="面试负责人">
+          <el-checkbox-group v-model="people">
+            <el-checkbox label="高渐离" name="type" />
+            <el-checkbox label="李成" name="type" />
+            <el-checkbox label="王杰" name="type" />
+            <el-checkbox label="马东雨" name="type" />
+            <el-checkbox label="张三" name="type" />
+            <el-checkbox label="李四" name="type" />
+            <el-checkbox label="王杰仁" name="type" />
+            <el-checkbox label="马东" name="type" />
+          </el-checkbox-group>
+        </el-form-item>
+        <!-- <el-form-item label="姓名" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name" />
           <el-input v-else v-model="person.name1" />
         </el-form-item>
@@ -357,7 +372,7 @@
         </el-form-item>
         <el-form-item label="账户启用状态" prop="title">
           <el-switch v-model="value6" disabled />
-        </el-form-item>
+        </el-form-item> -->
         <!-- <el-form-item label="合作项目" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.project" />
           <el-input v-else v-model="person.project1" />
@@ -462,6 +477,7 @@ export default {
       tableKey: 0,
       list: null,
       total: 0,
+      people: [],
       person: {
         name: '高渐离',
         major: '计算机科学与技术',
