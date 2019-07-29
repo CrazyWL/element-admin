@@ -326,20 +326,23 @@
                 />
               </template>
             </el-table-column> -->
-            <el-table-column align="center" label="操作" width="100">
+            <el-table-column align="center" label="操作" width="210">
               <template slot-scope="">
-                <el-button size="mini" type="primary" @click="handleUpdate()">
+                <el-button size="mini" type="primary" @click="handleUpdate(1)">
                   录入成绩
+                </el-button>
+                <el-button size="mini" type="primary" @click="handleUpdate(2)">
+                  重新定岗
                 </el-button>
               </template>
             </el-table-column>
           </el-table>
 
-          <div style="margin:20px;text-align:center;">
+          <!-- <div style="margin:20px;text-align:center;">
             <el-button class="filter-item" style="width:120px;" type="primary" @click="open1">
               保存
             </el-button>
-          </div>
+          </div> -->
         </template>
         <!-- <el-pagination
           background
@@ -359,7 +362,73 @@
         label-width="110px"
         style="width: 400px;margin-left:50px;"
       >
-        <el-form-item label="姓名" prop="title">
+
+        <template v-if="dialogType">
+          <el-form-item label="笔试成绩">
+            <el-input v-model="person.name1" />
+          </el-form-item>
+          <el-form-item label="机试成绩">
+            <el-input v-model="person.name2" />
+          </el-form-item>
+          <el-form-item label="面试成绩">
+            <el-input v-model="person.name3" />
+          </el-form-item>
+          <el-form-item label="评语">
+            <el-input v-model="person.name4" type="textarea" />
+          </el-form-item>
+          <el-form-item label="考试合格">
+            <el-switch
+              v-model="value1"
+              active-text=""
+            />
+          </el-form-item>
+        </template>
+        <template v-else>
+          <el-form-item label="面试岗位" prop="title">
+            <el-select v-model="person.post" class="filter-item" placeholder="岗位">
+              <el-option v-for="item of calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="级别" prop="title">
+            <el-select v-model="person.level" class="filter-item" placeholder="级别">
+              <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="调整原因" prop="title">
+            <!-- <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.education" /> -->
+            <el-input v-model="person.education1" type="textarea" />
+          </el-form-item>
+        </template>
+        <!-- <el-table-column align="center" label="评语" width="150">
+          <template>
+            <el-input type="input" />
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="笔试成绩" width="80">
+          <template>
+            <el-input type="input" />
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="机试成绩" width="80">
+          <template>
+            <el-input type="input" />
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="面试成绩" width="80">
+          <template>
+            <el-input type="input" />
+          </template>
+        </el-table-column>
+        <el-table-column align="center" label="考试合格" width="80">
+          <template>
+            <el-switch
+              v-model="value1"
+              style="height:40px;font-size:16px;"
+              active-text=""
+            />
+          </template>
+        </el-table-column> -->
+        <!-- <el-form-item label="姓名" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name" />
           <el-input v-else v-model="person.name1" />
         </el-form-item>
@@ -392,8 +461,8 @@
           <el-select v-model="person.level" class="filter-item" placeholder="级别">
             <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
           </el-select>
-        </el-form-item>
-        <el-form-item label="学历" prop="type">
+        </el-form-item> -->
+        <!-- <el-form-item label="学历" prop="type">
           <el-select v-model="person.education" class="filter-item" placeholder="学历">
             <el-option v-for="item of educationOptions" :key="item.key" :label="item.display_name" :value="item" />
           </el-select>
@@ -445,7 +514,7 @@
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
-        </el-form-item>
+        </el-form-item> -->
         <!-- <el-form-item label="账户启用状态" prop="title">
           <el-switch v-model="value6" disabled />
         </el-form-item> -->
@@ -627,6 +696,7 @@ export default {
       projectOptions: ['MAP3.2统一移动平台(2019)', '地服资源管理系统'],
       dialogFormVisible: false,
       dialogStatus: '',
+      dialogType: true, // 默认 录入成绩 false为重新定岗
       textMap: {
         update: '编辑',
         create: '新建',
@@ -680,8 +750,9 @@ export default {
       }
     },
     handleUpdate(row) {
-      this.temp = Object.assign({}, row) // copy obj
-      this.temp.timestamp = new Date(this.temp.timestamp)
+      // this.temp = Object.assign({}, row) // copy obj
+      // this.temp.timestamp = new Date(this.temp.timestamp)
+      row === 1 ? this.dialogType = true : this.dialogType = false
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {

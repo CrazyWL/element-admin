@@ -249,7 +249,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="center" label="面试分数">
+            <el-table-column align="center" label="面试成绩">
               <template>
                 89
               </template>
