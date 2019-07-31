@@ -1,17 +1,30 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate()">
-        新增
+      <el-select v-model="listQuery.importance" placeholder="考勤状态" clearable style="width: 120px" class="filter-item">
+        <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
+      </el-select>
+      <el-date-picker
+        v-model="value6"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+      />
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+        搜索
+      </el-button>
+      <el-button v-waves :loading="downloadLoading" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-download" @click="handleDownload">
+        导出
+      </el-button>
+      <!-- <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
+        同意入场
       </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-        同意
-      </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-        不同意
-      </el-button>
+        不同意入场
+      </el-button> -->
     </div>
-    <div class="filter-container">
+    <!-- <div class="filter-container">
       <el-collapse accordion>
         <el-collapse-item>
           <template slot="title">
@@ -24,29 +37,19 @@
           </template>
           <el-input v-model="listQuery.title" placeholder="姓名" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" />
           <el-input v-model="listQuery.title" placeholder="合作项目" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-select v-model="listQuery.importance" placeholder="任务类型" clearable style="width: 200px" class="filter-item">
+          <el-select v-model="listQuery.importance" placeholder="岗位" clearable style="width: 120px" class="filter-item">
             <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
           </el-select>
-
-          <el-input v-model="listQuery.type" placeholder="任务名称" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-
+          <el-select v-model="listQuery.type" placeholder="岗位级别" clearable class="filter-item" style="width: 160px">
+            <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+          </el-select>
+          <el-select v-model="listQuery.importance" placeholder="学历" clearable style="width: 120px" class="filter-item">
+            <el-option v-for="item in educationOptions" :key="item" :label="item" :value="item" />
+          </el-select>
           <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
           </el-select>
-          <el-date-picker
-            v-model="value5"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-          />
-          <!-- <el-select v-model="listQuery.importance" placeholder="学历" clearable style="width: 120px" class="filter-item">
-            <el-option v-for="item in educationOptions" :key="item" :label="item" :value="item" />
-          </el-select> -->
-          <!-- <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
-            <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
-          </el-select> -->
-          <!-- <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" /> -->
+          <el-input v-model="listQuery.title" placeholder="工作年限" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" />
 
           <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
             搜索
@@ -54,13 +57,7 @@
         </el-collapse-item>
       </el-collapse>
 
-      <!-- <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
-        Export
-      </el-button>
-      <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
-        reviewer
-      </el-checkbox> -->
-    </div>
+    </div> -->
 
     <el-table
       :key="tableKey"
@@ -73,7 +70,7 @@
       :header-cell-style="{background:'#f1f7ff',color:'#606266'}"
       @sort-change="sortChange"
     >
-      <el-table-column
+      <!-- <el-table-column
         type="selection"
         align="center"
         width="38"
@@ -82,10 +79,15 @@
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="姓名" width="100px" align="center">
         <template slot-scope="">
           高渐离
+        </template>
+      </el-table-column>
+      <el-table-column label="资格证书" align="center">
+        <template slot-scope="">
+          868767656758
         </template>
       </el-table-column>
       <el-table-column label="合作项目" align="center">
@@ -93,69 +95,34 @@
           OA办公自动化系统
         </template>
       </el-table-column>
-      <el-table-column label="任务名称" align="center">
-        <template slot-scope="">
-          考勤管理开发
-        </template>
-      </el-table-column>
-      <el-table-column label="任务类型" width="100px" align="center">
-        <template slot-scope="">
-          功能开发
-        </template>
-      </el-table-column>
-      <el-table-column label="申请工时" width="100px" align="center">
-        <template slot-scope="">
-          8
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="申请日期" width="95">
-        <template>
-          <span>2019/09/10</span>
-        </template>
-      </el-table-column>
       <el-table-column align="center" label="操作日期" width="95">
         <template>
-          <span>2019/09/11</span>
+          <span>2018/09/01</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column label="毕业院校" width="120px" align="center">
-        <template slot-scope="">
-          华南理工大学
+      <el-table-column align="center" label="操作时间" width="95">
+        <template>
+          <span>08:34:51</span>
         </template>
       </el-table-column>
-      <el-table-column label="工作年限" width="90px" align="center">
+      <el-table-column label="类型" width="80px" align="center">
         <template slot-scope="">
-          3
-        </template>
-      </el-table-column> -->
-      <el-table-column label="状态" width="70px" align="center">
-        <template slot-scope="">
-          待评估
+          签到
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="180px" align="center">
-        <template slot-scope="{row}">
-
-          <!-- <router-link to="/components/tab">
-            <el-button size="mini" type="primary">
-              查看
-            </el-button>
-          </router-link> -->
-          <el-button type="primary" size="mini" @click="handleView(row)">
-            查看
-          </el-button>
-          <!-- <el-button v-if="row.status!='published'" size="mini" type="success" @click="handleModifyStatus(row,'published')">
-            Publish
-          </el-button>
-          <el-button v-if="row.status!='draft'" size="mini" @click="handleModifyStatus(row,'draft')">
-            Draft
-          </el-button>
-          <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(row,'deleted')">
-            删除
-          </el-button>-->
-          <el-button size="mini" type="success" @click="handleModifyStatus(row,'deleted')">
-            同意
-          </el-button>
+      <el-table-column label="状态" width="80px" align="center">
+        <template slot-scope="">
+          正常
+        </template>
+      </el-table-column>
+      <el-table-column label="班次类型" width="120px" align="center">
+        <template slot-scope="">
+          股份大楼
+        </template>
+      </el-table-column>
+      <el-table-column label="IP" width="120px" align="center">
+        <template slot-scope="">
+          192.168.112
         </template>
       </el-table-column>
       <!-- <el-table-column label="ID" prop="id" sortable="custom" align="center" width="80">
@@ -222,7 +189,7 @@
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
-    <el-dialog :title="textMap[dialogStatus]" center :visible.sync="dialogFormVisible">
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form
         ref="dataForm"
         :rules="rules"
@@ -231,51 +198,31 @@
         label-width="110px"
         style="width: 400px;margin-left:50px;"
       >
-        <el-form-item label="任务名称" prop="title">
+        <el-form-item label="姓名" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name" />
           <el-input v-else v-model="person.name1" />
         </el-form-item>
-        <!-- <el-form-item label="性别" prop="title">
+        <el-form-item label="性别" prop="title">
           <el-radio-group v-model="radio">
             <el-radio :label="1">保密</el-radio>
             <el-radio :label="2">男</el-radio>
             <el-radio :label="3">女</el-radio>
           </el-radio-group>
-        </el-form-item> -->
-        <el-form-item label="任务类型" prop="type">
-          <el-select v-model="person.importance" class="filter-item" placeholder="任务类型">
-            <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
+        </el-form-item>
+        <el-form-item label="身份证号" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.userID" />
+          <el-input v-else v-model="person.userID1" />
+        </el-form-item>
+        <el-form-item label="手机号" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.tel" />
+          <el-input v-else v-model="person.tel1" />
+        </el-form-item>
+        <el-form-item label="合作项目" prop="type">
+          <el-select v-model="person.project" class="filter-item" placeholder="合作项目">
+            <el-option v-for="item of projectOptions" :key="item.key" :label="item.display_name" :value="item" />
           </el-select>
         </el-form-item>
-        <el-form-item label="任务描述">
-          <el-input type="textarea" />
-        </el-form-item>
-        <el-form-item label="申请日期" prop="title">
-          <el-date-picker
-            v-if="textMap[dialogStatus] == '新建'"
-            v-model="value1"
-            type="date"
-            placeholder="选择日期"
-          />
-          <el-date-picker
-            v-else
-            v-model="person.date"
-            type="date"
-            placeholder="选择日期"
-          />
-        </el-form-item>
-        <el-form-item label="申请工时" prop="title">
-          <el-input v-if="textMap[dialogStatus] == '新建'" v-model="person.tel1" />
-          <el-input v-else v-model="person.hours" />
-        </el-form-item>
-        <el-form-item label="问题">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name1" />
-          <el-input v-else v-model="person.name1" />
-        </el-form-item>
-        <el-form-item label="问题描述">
-          <el-input type="textarea" />
-        </el-form-item>
-        <!-- <el-form-item label="岗位" prop="type">
+        <el-form-item label="岗位" prop="type">
           <el-select v-model="person.post" class="filter-item" placeholder="岗位">
             <el-option v-for="item of calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item" />
           </el-select>
@@ -289,8 +236,8 @@
           <el-select v-model="person.education" class="filter-item" placeholder="学历">
             <el-option v-for="item of educationOptions" :key="item.key" :label="item.display_name" :value="item" />
           </el-select>
-        </el-form-item> -->
-        <!-- <el-form-item label="毕业院校" prop="title">
+        </el-form-item>
+        <el-form-item label="毕业院校" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.school" />
           <el-input v-else v-model="person.school1" />
         </el-form-item>
@@ -340,7 +287,7 @@
         </el-form-item>
         <el-form-item label="账户启用状态" prop="title">
           <el-switch v-model="value6" disabled />
-        </el-form-item> -->
+        </el-form-item>
         <!-- <el-form-item label="合作项目" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.project" />
           <el-input v-else v-model="person.project1" />
@@ -381,18 +328,12 @@
         </el-form-item> -->
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button v-if="dialogStatus==='create'" type="primary" @click="dialogStatus==='create'?createData():updateData()">
-          保存
+        <el-button @click="dialogFormVisible = false">
+          取消
         </el-button>
-        <template v-else>
-
-          <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-            同意
-          </el-button>
-          <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-            调整工时
-          </el-button>
-        </template>
+        <el-button v-if="textMap[dialogStatus] !== '查看'" type="primary" @click="dialogStatus==='create'?createData():updateData()">
+          确认
+        </el-button>
       </div>
     </el-dialog>
 
@@ -446,25 +387,19 @@ export default {
   },
   data() {
     return {
-      value1: '',
-      value4: '',
-      value5: '',
       radio: 1,
       value6: true,
       tableKey: 0,
       list: null,
       total: 0,
       person: {
-        name: '考勤管理开发',
+        name: '高渐离',
         project: 'OA办公自动化系统',
-        importance: '功能开发',
         post: 'JAVA开发工程师',
         level: '高级',
         education: '本科',
         school: '华南理工大学',
         workYear: '3',
-        hours: '8',
-        date: '2018/09/10',
         userID: 423765456787654431,
         tel: 13676543212
       },
@@ -479,9 +414,9 @@ export default {
         status: undefined,
         sort: '+id'
       },
-      importanceOptions: ['功能开发', '原型设计'],
+      importanceOptions: ['正常', '异常'],
       educationOptions: ['研究生', '本科', '大专'],
-      statusOptions: ['完成', '未完成', '待评估'],
+      statusOptions: ['新建', '面试入围', '面试合格', '面试失败', '申请入场试用', '入场试用', '正式入场', '退场'],
       projectOptions: ['OA办公自动化系统', '南航地服系统'],
       calendarTypeOptions,
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],

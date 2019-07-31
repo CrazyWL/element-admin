@@ -198,11 +198,11 @@
               </template>
             </el-table-column>
 
-            <!-- <el-table-column align="center" label="毕业院校">
+            <el-table-column align="center" label="毕业院校">
               <template slot-scope="scope">
                 <span>{{ scope.row.byyx }}</span>
               </template>
-            </el-table-column> -->
+            </el-table-column>
 
             <el-table-column width="80px" align="center" label="工作年限">
               <template slot-scope="scope">
@@ -210,7 +210,7 @@
               </template>
             </el-table-column>
 
-            <el-table-column align="center" label="评语" width="150">
+            <!-- <el-table-column align="center" label="评语" width="150">
               <template>
                 <el-input type="input" />
               </template>
@@ -238,13 +238,23 @@
                   active-text=""
                 />
               </template>
+            </el-table-column> -->
+            <el-table-column align="center" label="操作" width="210">
+              <template slot-scope="">
+                <el-button size="mini" type="primary" @click="handleUpdate(1)">
+                  录入成绩
+                </el-button>
+                <el-button size="mini" type="primary" @click="handleUpdate(2)">
+                  重新定岗
+                </el-button>
+              </template>
             </el-table-column>
           </el-table>
-          <div style="margin:20px;text-align:center;">
+          <!-- <div style="margin:20px;text-align:center;">
             <el-button class="filter-item" style="width:120px;" type="primary" @click="open1">
               保存
             </el-button>
-          </div>
+          </div> -->
         </template>
         <template v-else>
           <el-table

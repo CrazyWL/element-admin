@@ -1,15 +1,11 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate()">
-        新增
-      </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-        同意
-      </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-        不同意
-      </el-button>
+      <!-- <router-link to="supplier">
+        <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline">
+          新增月度考核
+        </el-button>
+      </router-link> -->
     </div>
     <div class="filter-container">
       <el-collapse accordion>
@@ -22,17 +18,23 @@
               <span style="margin-right:10px;">收起筛选</span>
             </div>
           </template>
-          <el-input v-model="listQuery.title" placeholder="姓名" style="width: 120px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-input v-model="listQuery.title" placeholder="合作项目" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-          <el-select v-model="listQuery.importance" placeholder="任务类型" clearable style="width: 200px" class="filter-item">
+          <el-input v-model="listQuery.title" placeholder="外包公司" style="width: 240px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-input v-model="listQuery.title" placeholder="合作项目" style="width: 240px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <!-- <el-select v-model="listQuery.importance" placeholder="任务类型" clearable style="width: 200px" class="filter-item">
             <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
           </el-select>
 
-          <el-input v-model="listQuery.type" placeholder="任务名称" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-input v-model="listQuery.type" placeholder="任务名称" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" /> -->
 
-          <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
+          <el-input v-model="listQuery.title" placeholder="总体评分" style="width: 260px;" class="filter-item" @keyup.enter.native="handleFilter" />
+          <el-date-picker
+            v-model="value4"
+            type="month"
+            placeholder="考核月份"
+          />
+          <!-- <el-select v-model="listQuery.status" placeholder="状态" clearable style="width: 120px" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
-          </el-select>
+          </el-select> -->
           <el-date-picker
             v-model="value5"
             type="daterange"
@@ -73,51 +75,52 @@
       :header-cell-style="{background:'#f1f7ff',color:'#606266'}"
       @sort-change="sortChange"
     >
-      <el-table-column
+      <!-- <el-table-column
         type="selection"
         align="center"
         width="38"
-      />
+      /> -->
       <el-table-column label="序号" align="center" width="50">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="姓名" width="100px" align="center">
-        <template slot-scope="">
-          高渐离
-        </template>
-      </el-table-column>
+
       <el-table-column label="合作项目" align="center">
         <template slot-scope="">
-          OA办公自动化系统
+          地服资源管理系统
         </template>
       </el-table-column>
-      <el-table-column label="任务名称" align="center">
+      <el-table-column label="批次" width="90px;" align="center">
         <template slot-scope="">
-          考勤管理开发
+          2019年度
         </template>
       </el-table-column>
-      <el-table-column label="任务类型" width="100px" align="center">
+      <el-table-column label="考核月份" align="center">
         <template slot-scope="">
-          功能开发
+          2019/09
         </template>
       </el-table-column>
-      <el-table-column label="申请工时" width="100px" align="center">
+      <!-- <el-table-column label="外包公司" width="120px" align="center">
         <template slot-scope="">
-          8
+          金税信息技术股份有限公司
+        </template>
+      </el-table-column> -->
+      <el-table-column label="总体评分" width="120px" align="center">
+        <template slot-scope="">
+          86
         </template>
       </el-table-column>
-      <el-table-column align="center" label="申请日期" width="95">
+      <el-table-column align="center" label="考核日期" width="95">
         <template>
           <span>2019/09/10</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="操作日期" width="95">
+      <!-- <el-table-column align="center" label="操作日期" width="95">
         <template>
           <span>2019/09/11</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <!-- <el-table-column label="毕业院校" width="120px" align="center">
         <template slot-scope="">
           华南理工大学
@@ -128,22 +131,23 @@
           3
         </template>
       </el-table-column> -->
-      <el-table-column label="状态" width="70px" align="center">
+      <!-- <el-table-column label="状态" width="70px" align="center">
         <template slot-scope="">
           待评估
         </template>
-      </el-table-column>
-      <el-table-column label="操作" width="180px" align="center">
-        <template slot-scope="{row}">
+      </el-table-column> -->
+      <el-table-column label="操作" width="240px" align="center">
+        <!-- <template slot-scope="{row}"> -->
+        <template slot-scope="">
 
           <!-- <router-link to="/components/tab">
             <el-button size="mini" type="primary">
               查看
             </el-button>
           </router-link> -->
-          <el-button type="primary" size="mini" @click="handleView(row)">
+          <!-- <el-button type="primary" size="mini" @click="handleView(row)">
             查看
-          </el-button>
+          </el-button> -->
           <!-- <el-button v-if="row.status!='published'" size="mini" type="success" @click="handleModifyStatus(row,'published')">
             Publish
           </el-button>
@@ -153,9 +157,11 @@
           <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(row,'deleted')">
             删除
           </el-button>-->
-          <el-button size="mini" type="success" @click="handleModifyStatus(row,'deleted')">
-            同意
-          </el-button>
+          <router-link to="supplier">
+            <el-button size="mini" type="primary">
+              考核详情
+            </el-button>
+          </router-link>
         </template>
       </el-table-column>
       <!-- <el-table-column label="ID" prop="id" sortable="custom" align="center" width="80">
@@ -231,7 +237,7 @@
         label-width="110px"
         style="width: 400px;margin-left:50px;"
       >
-        <el-form-item label="任务名称" prop="title">
+        <el-form-item label="合作项目" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name" />
           <el-input v-else v-model="person.name1" />
         </el-form-item>
@@ -242,39 +248,34 @@
             <el-radio :label="3">女</el-radio>
           </el-radio-group>
         </el-form-item> -->
-        <el-form-item label="任务类型" prop="type">
-          <el-select v-model="person.importance" class="filter-item" placeholder="任务类型">
-            <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
+        <el-form-item label="考核月份" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.month" />
+          <el-input v-else v-model="person.tel1" />
         </el-form-item>
-        <el-form-item label="任务描述">
-          <el-input type="textarea" />
+        <el-form-item label="外包公司">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.company" />
+          <el-input v-else v-model="person.tel1" />
         </el-form-item>
-        <el-form-item label="申请日期" prop="title">
+        <el-form-item label="总体评分" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.hours" />
           <el-date-picker
-            v-if="textMap[dialogStatus] == '新建'"
+            v-else
             v-model="value1"
             type="date"
             placeholder="选择日期"
           />
-          <el-date-picker
-            v-else
-            v-model="person.date"
-            type="date"
-            placeholder="选择日期"
-          />
         </el-form-item>
-        <el-form-item label="申请工时" prop="title">
-          <el-input v-if="textMap[dialogStatus] == '新建'" v-model="person.tel1" />
-          <el-input v-else v-model="person.hours" />
+        <el-form-item label="考核日期" prop="title">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.date" />
+          <el-input v-else v-model="person.tel1" />
         </el-form-item>
-        <el-form-item label="问题">
+        <!-- <el-form-item label="问题">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name1" />
           <el-input v-else v-model="person.name1" />
         </el-form-item>
         <el-form-item label="问题描述">
           <el-input type="textarea" />
-        </el-form-item>
+        </el-form-item> -->
         <!-- <el-form-item label="岗位" prop="type">
           <el-select v-model="person.post" class="filter-item" placeholder="岗位">
             <el-option v-for="item of calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item" />
@@ -385,12 +386,8 @@
           保存
         </el-button>
         <template v-else>
-
-          <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-            同意
-          </el-button>
-          <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-            调整工时
+          <el-button @click="dialogFormVisible = false">
+            取消
           </el-button>
         </template>
       </div>
@@ -455,15 +452,17 @@ export default {
       list: null,
       total: 0,
       person: {
-        name: '考勤管理开发',
+        name: '地服资源管理系统',
         project: 'OA办公自动化系统',
         importance: '功能开发',
+        company: '金税信息技术股份有限公司',
         post: 'JAVA开发工程师',
         level: '高级',
         education: '本科',
         school: '华南理工大学',
         workYear: '3',
-        hours: '8',
+        hours: '86',
+        month: '2018/09',
         date: '2018/09/10',
         userID: 423765456787654431,
         tel: 13676543212

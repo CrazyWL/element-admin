@@ -243,7 +243,7 @@
           </el-radio-group>
         </el-form-item> -->
         <el-form-item label="任务类型" prop="type">
-          <el-select v-model="person.importance" class="filter-item" placeholder="任务类型">
+          <el-select v-model="person.importance" class="filter-item" placeholder="合作项目">
             <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
           </el-select>
         </el-form-item>
@@ -251,22 +251,17 @@
           <el-input type="textarea" />
         </el-form-item>
         <el-form-item label="申请日期" prop="title">
-          <el-date-picker
-            v-if="textMap[dialogStatus] == '新建'"
-            v-model="value1"
-            type="date"
-            placeholder="选择日期"
-          />
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.hours" />
           <el-date-picker
             v-else
-            v-model="person.date"
+            v-model="value1"
             type="date"
             placeholder="选择日期"
           />
         </el-form-item>
         <el-form-item label="申请工时" prop="title">
-          <el-input v-if="textMap[dialogStatus] == '新建'" v-model="person.tel1" />
-          <el-input v-else v-model="person.hours" />
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.date" />
+          <el-input v-else v-model="person.tel1" />
         </el-form-item>
         <el-form-item label="问题">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name1" />

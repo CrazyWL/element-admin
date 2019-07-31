@@ -248,23 +248,29 @@
           </el-select>
         </el-form-item>
         <el-form-item label="任务描述">
-          <el-input type="textarea" />
+          <el-input v-if="textMap[dialogStatus] == '新建'" type="textarea" value="" />
+          <el-input v-else type="textarea" value="人员权限隔离实现" />
         </el-form-item>
         <el-form-item label="申请日期" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.hours" />
+          <el-date-picker
+            v-if="textMap[dialogStatus] == '新建'"
+            v-model="value1"
+            type="date"
+            placeholder="选择日期"
+          />
           <el-date-picker
             v-else
-            v-model="value1"
+            v-model="person.date"
             type="date"
             placeholder="选择日期"
           />
         </el-form-item>
         <el-form-item label="申请工时" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.date" />
-          <el-input v-else v-model="person.tel1" />
+          <el-input v-if="textMap[dialogStatus] == '新建'" v-model="person.tel1" />
+          <el-input v-else v-model="person.hours" />
         </el-form-item>
         <el-form-item label="人天数">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.date" />
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.day" />
           <el-input v-else v-model="person.tel1" disabled />
         </el-form-item>
         <el-form-item label="问题">
@@ -463,6 +469,7 @@ export default {
         school: '华南理工大学',
         workYear: '3',
         hours: '8',
+        day: '1',
         date: '2018/09/10',
         userID: 423765456787654431,
         tel: 13676543212

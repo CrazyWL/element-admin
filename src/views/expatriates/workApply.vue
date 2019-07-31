@@ -2,13 +2,13 @@
   <div class="app-container">
     <div class="block">
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate()">
-        新增
+        工时申请
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
+      <!-- <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
         同意
-      </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
-        不同意
+      </el-button> -->
+      <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-bell" @click="open">
+        撤销
       </el-button>
     </div>
     <div class="filter-container">
@@ -130,7 +130,7 @@
       </el-table-column> -->
       <el-table-column label="状态" width="70px" align="center">
         <template slot-scope="">
-          待评估
+          待审批
         </template>
       </el-table-column>
       <el-table-column label="操作" width="180px" align="center">
@@ -144,6 +144,9 @@
           <el-button type="primary" size="mini" @click="handleView(row)">
             查看
           </el-button>
+          <el-button size="mini" type="danger" @click="open">
+            撤销
+          </el-button>
           <!-- <el-button v-if="row.status!='published'" size="mini" type="success" @click="handleModifyStatus(row,'published')">
             Publish
           </el-button>
@@ -153,9 +156,9 @@
           <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(row,'deleted')">
             删除
           </el-button>-->
-          <el-button size="mini" type="success" @click="handleModifyStatus(row,'deleted')">
+          <!-- <el-button size="mini" type="success" @click="handleModifyStatus(row,'deleted')">
             同意
-          </el-button>
+          </el-button> -->
         </template>
       </el-table-column>
       <!-- <el-table-column label="ID" prop="id" sortable="custom" align="center" width="80">
@@ -248,7 +251,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="任务描述">
-          <el-input type="textarea" />
+          <el-input v-if="textMap[dialogStatus] == '新建'" type="textarea" value="" />
+          <el-input v-else type="textarea" value="人员权限隔离实现" />
         </el-form-item>
         <el-form-item label="申请日期" prop="title">
           <el-date-picker
@@ -267,6 +271,10 @@
         <el-form-item label="申请工时" prop="title">
           <el-input v-if="textMap[dialogStatus] == '新建'" v-model="person.tel1" />
           <el-input v-else v-model="person.hours" />
+        </el-form-item>
+        <el-form-item label="人天数">
+          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.day" />
+          <el-input v-else v-model="person.tel1" disabled />
         </el-form-item>
         <el-form-item label="问题">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name1" />
@@ -464,6 +472,7 @@ export default {
         school: '华南理工大学',
         workYear: '3',
         hours: '8',
+        day: '1',
         date: '2018/09/10',
         userID: 423765456787654431,
         tel: 13676543212
@@ -481,7 +490,7 @@ export default {
       },
       importanceOptions: ['功能开发', '原型设计'],
       educationOptions: ['研究生', '本科', '大专'],
-      statusOptions: ['完成', '未完成', '待评估'],
+      statusOptions: ['审批拒绝', '审批通过', '待审批'],
       projectOptions: ['OA办公自动化系统', '南航地服系统'],
       calendarTypeOptions,
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
@@ -531,7 +540,7 @@ export default {
     },
     open() {
       this.$message({
-        message: '发送成功!',
+        message: '操作成功!',
         type: 'success'
       })
     },

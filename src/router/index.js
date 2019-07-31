@@ -333,6 +333,13 @@ export const asyncRoutes = [
         meta: { title: '供应商月度考核记录' }
       },
       {
+        path: 'leaveCheck',
+        component: () => import('@/views/manager/leaveCheck'),
+        name: '',
+        // hidden: true,
+        meta: { title: '请假审批' }
+      },
+      {
         path: 'out',
         component: () => import('@/views/manager/out'),
         name: '',
@@ -791,6 +798,223 @@ export const asyncRoutes = [
       {
         path: 'exit',
         component: () => import('@/views/HR/exit'),
+        name: '',
+        hidden: true,
+        meta: { title: '外包人员退场' }
+      }
+      // {
+      //   path: 'create',
+      //   component: () => import('@/views/example/create'),
+      //   name: 'CreateArticle',
+      //   meta: { title: 'Create Article' }
+      // }
+    ]
+  },
+  {
+    path: '/expatriates',
+    component: Layout,
+    // redirect: '/expatriates/list',
+    name: 'Example',
+    meta: {
+      title: '外包人员',
+      icon: 'excel'
+    },
+    children: [
+
+      // {
+      //   path: 'edit/:id(\\d+)',
+      //   component: () => import('@/views/supplier/edit'),
+      //   name: 'EditArticle',
+      //   meta: { title: 'Edit Article', noCache: true, activeMenu: '/supplier/list' },
+      //   hidden: true
+      // },
+      // {
+      //   path: '/expatriates/dashboard',
+      //   component: () => import('@/views/expatriates/dashboard/index'),
+      //   name: '',
+      //   meta: { title: '首页' }
+      // },
+      {
+        path: 'workApply',
+        component: () => import('@/views/expatriates/workApply'),
+        name: '',
+        meta: { title: '工时管理' }
+      },
+      {
+        path: 'leaveList',
+        component: () => import('@/views/expatriates/leaveList'),
+        name: '',
+        meta: { title: '请假记录' }
+      },
+      {
+        path: 'tab',
+        component: () => import('@/views/expatriates/tab'),
+        name: '',
+        hidden: true,
+        meta: { title: '合作项目详情' }
+      },
+      // {
+      //   path: 'projecter',
+      //   component: () => import('@/views/expatriates/projecter'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '外包人员' }
+      // },
+      {
+        path: 'projecterInfo',
+        component: () => import('@/views/expatriates/projecterInfo'),
+        name: '',
+        hidden: true,
+        meta: { title: '人员详情' }
+      },
+      // {
+      //   path: 'listCompany',
+      //   component: () => import('@/views/expatriates/listCompany'),
+      //   name: '',
+      //   meta: { title: '合作项目-外包' }
+      // },
+      {
+        path: 'interview',
+        component: () => import('@/views/expatriates/interview'),
+        name: '',
+        hidden: true,
+        meta: { title: '面试申请' }
+      },
+      {
+        path: 'interviewInfo',
+        component: () => import('@/views/expatriates/interviewInfo'),
+        name: '',
+        hidden: true,
+        meta: { title: '面试详情' }
+      },
+      // {
+      //   path: 'interviewList',
+      //   component: () => import('@/views/expatriates/interviewList'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '面试记录' }
+      // },
+      {
+        path: 'trial',
+        component: () => import('@/views/expatriates/trial'),
+        name: '',
+        hidden: true,
+        meta: { title: '入场试用申请' }
+      },
+      // {
+      //   path: 'trialList',
+      //   component: () => import('@/views/expatriates/trialList'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '入场试用审批' }
+      // },
+      // {
+      //   path: 'trialListView',
+      //   component: () => import('@/views/expatriates/trialListView'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '入场试用审批记录' }
+      // },
+      // {
+      //   path: 'trialInfo',
+      //   component: () => import('@/views/expatriates/trialInfo'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '入场试用考核查看' }
+      // },
+      {
+        path: 'supplierList',
+        component: () => import('@/views/expatriates/supplierList'),
+        name: '',
+        hidden: true,
+        meta: { title: '月度考核查阅' }
+      },
+      {
+        path: 'trialView',
+        component: () => import('@/views/expatriates/trialView'),
+        name: '',
+        hidden: true,
+        meta: { title: '入场试用考核审核结果' }
+      },
+      {
+        path: 'check',
+        component: () => import('@/views/expatriates/check'),
+        name: '',
+        hidden: true,
+        meta: { title: '入场试用考核详情' }
+      },
+      {
+        path: 'workManage',
+        component: () => import('@/views/expatriates/workManage'),
+        name: '',
+        hidden: true,
+        meta: { title: '工时申请审核列表' }
+      },
+      // {
+      //   path: 'workList',
+      //   component: () => import('@/views/expatriates/workList'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '外包人员工时查看' }
+      // },
+      // {
+      //   path: 'checkManage',
+      //   component: () => import('@/views/expatriates/checkManage'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '外包人员考勤查看' }
+      // },
+      {
+        path: 'supplier',
+        component: () => import('@/views/expatriates/supplier'),
+        name: '',
+        hidden: true,
+        meta: { title: '月度考核详情查看' }
+      },
+      // {
+      //   path: 'out',
+      //   component: () => import('@/views/expatriates/out'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '外包人员退场查看' }
+      // },
+      {
+        path: 'exitDetail',
+        component: () => import('@/views/expatriates/exitDetail'),
+        name: '',
+        hidden: true,
+        meta: { title: '外包人员退场办理详情' }
+      },
+      // {
+      //   path: 'file',
+      //   component: () => import('@/views/expatriates/file'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '归档人员' }
+      // },
+      // {
+      //   path: 'outList',
+      //   component: () => import('@/views/expatriates/outList'),
+      //   name: '',
+      //   // hidden: true,
+      //   meta: { title: '退场历史记录' }
+      // },
+      // {
+      //   path: 'projectImport',
+      //   component: () => import('@/views/expatriates/projectImport'),
+      //   name: '',
+      //   meta: { title: '项目导入' }
+      // },
+      // {
+      //   path: 'tab',
+      //   component: () => import('@/views/expatriates/tab'),
+      //   name: '',
+      //   hidden: true,
+      //   meta: { title: '项目详情' }
+      // },
+      {
+        path: 'exit',
+        component: () => import('@/views/expatriates/exit'),
         name: '',
         hidden: true,
         meta: { title: '外包人员退场' }
