@@ -14,11 +14,14 @@
           导入
         </el-button>
       </router-link>-->
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="handleUpdate()">
         批量入场试用
       </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-delete" @click="open">
         面试作废
+      </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-bell" @click="open">
+        撤销
       </el-button>
     </div>
     <div class="filter-container">
@@ -214,7 +217,7 @@
               查看
             </el-button>
           </router-link>
-          <el-button size="mini" type="primary" @click="open">
+          <el-button size="mini" type="primary" @click="handleUpdate()">
             入场试用
           </el-button>
           <!-- <el-button type="success" size="mini" @click="handleUpdate(row)">
@@ -307,95 +310,19 @@
         label-width="110px"
         style="width: 400px;margin-left:50px;"
       >
-        <el-form-item label="姓名" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.name" />
-          <el-input v-else v-model="person.name1" />
-        </el-form-item>
-        <el-form-item label="性别" prop="title">
-          <el-radio-group v-model="radio">
-            <el-radio :label="1">保密</el-radio>
-            <el-radio :label="2">男</el-radio>
-            <el-radio :label="3">女</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="身份证号" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.userID" />
-          <el-input v-else v-model="person.userID1" />
-        </el-form-item>
-        <el-form-item label="手机号" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.tel" />
-          <el-input v-else v-model="person.tel1" />
-        </el-form-item>
-        <el-form-item label="合作项目" prop="type">
-          <el-select v-model="person.project" class="filter-item" placeholder="合作项目">
-            <el-option v-for="item of projectOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="岗位" prop="type">
-          <el-select v-model="person.post" class="filter-item" placeholder="岗位">
-            <el-option v-for="item of calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="级别" prop="type">
-          <el-select v-model="person.level" class="filter-item" placeholder="级别">
-            <el-option v-for="item of importanceOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="学历" prop="type">
-          <el-select v-model="person.education" class="filter-item" placeholder="学历">
-            <el-option v-for="item of educationOptions" :key="item.key" :label="item.display_name" :value="item" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="毕业院校" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.school" />
-          <el-input v-else v-model="person.school1" />
-        </el-form-item>
-        <el-form-item label="专业" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.major" />
-          <el-input v-else v-model="person.major1" />
-        </el-form-item>
-        <el-form-item label="工作年限" prop="title">
-          <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.workYear" />
-          <el-input v-else v-model="person.workYear1" />
-        </el-form-item>
-        <el-form-item label="身份证明" prop="title">
-          <el-upload
-            class="upload-demo"
-            drag
-            action="https://jsonplaceholder.typicode.com/posts/"
-            multiple
-          >
-            <i class="el-icon-upload" />
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="学历证明" prop="title">
-          <el-upload
-            class="upload-demo"
-            drag
-            action="https://jsonplaceholder.typicode.com/posts/"
-            multiple
-          >
-            <i class="el-icon-upload" />
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="社保证明" prop="title">
-          <el-upload
-            class="upload-demo"
-            drag
-            action="https://jsonplaceholder.typicode.com/posts/"
-            multiple
-          >
-            <i class="el-icon-upload" />
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-          </el-upload>
-        </el-form-item>
-        <el-form-item label="账户启用状态" prop="title">
-          <el-switch v-model="value6" disabled />
+        <el-form-item label="入场日期">
+          <el-date-picker
+            v-if="textMap[dialogStatus] == '新建'"
+            v-model="value1"
+            type="date"
+            placeholder="选择日期"
+          />
+          <el-date-picker
+            v-else
+            v-model="person.date"
+            type="date"
+            placeholder="选择日期"
+          />
         </el-form-item>
         <!-- <el-form-item label="合作项目" prop="title">
           <el-input v-if="textMap[dialogStatus] !== '新建'" v-model="person.project" />
@@ -545,7 +472,7 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
-        update: '编辑',
+        update: '入场试用',
         create: '新建',
         view: '查看'
       },

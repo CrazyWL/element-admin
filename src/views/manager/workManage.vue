@@ -10,6 +10,9 @@
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-bell" @click="open">
         不同意
       </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="danger" icon="el-icon-bell" @click="open">
+        撤销
+      </el-button>
     </div>
     <div class="filter-container">
       <el-collapse accordion>
@@ -537,7 +540,7 @@ export default {
     },
     open() {
       this.$message({
-        message: '发送成功!',
+        message: '操作成功!',
         type: 'success'
       })
     },

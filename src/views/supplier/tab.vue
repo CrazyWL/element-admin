@@ -229,7 +229,7 @@
             </template>
           </el-table-column> -->
 
-          <el-table-column align="center" label="面试分数" width="80">
+          <el-table-column align="center" label="面试成绩" width="80">
             <template>
               <span>87</span>
             </template>
